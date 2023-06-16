@@ -16,8 +16,8 @@ import Table from '../components/Table.vue'
     <h4>K M Amaz Uddin Shaon</h4>
   </div>
   <div class="fileLink">
-    <a href="">Github Code File</a>
-    <a href="">Live Demo</a>
+    <a href="https://github.com/amaz11/jatri-technical-test">Github Code File</a>
+    <a href="https://admirable-bunny-b24fa0.netlify.app/">Live Demo</a>
   </div>
 </div>
 <div class="table">
