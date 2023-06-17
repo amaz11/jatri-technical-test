@@ -1,7 +1,7 @@
 <template>
   <div class="pagination">
       <button class="previousNextBtn" @click="handlePrevious" :disabled="currentPage === 1">Previous</button>
-      <button class="btnPerPage" v-for="page in totalPages" :key="page" @click="handleGoToPage(page)" :class="{ active: currentPage === page }">{{ page }}</button>
+      <button class="btnPerPage" v-for="page in totalPages" :key="page" @click="handleGoToPage(page)" :class="{ activePage: currentPage === page }">{{ page }}</button>
       <button class="previousNextBtn" @click="handleNext" :disabled="currentPage === totalPages">Next</button>
     </div>
 </template>
@@ -49,5 +49,9 @@ const handleGoToPage = (page) => {
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
+}
+
+.activePage{
+  background-color: #0d7c5b;
 }
 </style>

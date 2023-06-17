@@ -8,6 +8,7 @@
 
 <script setup>
 defineProps(["name", "value"]);
+
 const emit = defineEmits(["update:value"]);
 const handelInput = (e)=>{
     emit('update:value', e.target.value)

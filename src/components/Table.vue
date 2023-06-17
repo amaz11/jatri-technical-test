@@ -35,16 +35,17 @@
       />
   </div>
 
-  <div v-else>
-    <p>Loading...</p>
+  <div class="loaderTable" v-else>
+    <Loader/>
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted, onUpdated, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import TableRow from "./TableRow.vue";
 import Pagination from "./Pagination.vue";
 import FiltterProducts from "./FiltterProducts.vue";
+import Loader from "./Loader.vue";
 
 const products = ref([]);
 const currentPage = ref(1);
@@ -52,6 +53,8 @@ const perPage = ref(5);
 const totalItems = ref(0);
 const ratingFilter = ref("");
 const priceFilter = ref("");
+
+// Data Fetching
 onMounted(async () => {
   try {
     const res = await fetch("https://dummyjson.com/products");
@@ -63,32 +66,38 @@ onMounted(async () => {
   }
 });
 
+// Pagination Data
 const paginatedData = () => {
   const startIndex = (currentPage.value - 1) * perPage.value;
   const endIndex = startIndex + perPage.value;
   return products.value.slice(startIndex, endIndex);
 };
 
+// Total Page
 const totalPages = computed(() => {
   return Math.ceil(totalItems.value / perPage.value);
 });
 
+// Previous page btn
 const previousPage = () => {
   if (currentPage.value > 1) {
     currentPage.value--;
   }
 };
 
+// Next page btn
 const nextPage = () => {
   if (currentPage.value < totalPages.value) {
     currentPage.value++;
   }
 };
 
+// Single page Click
 const goToPage = (page) => {
   currentPage.value = page;
 };
 
+// Product Filter 
 const filteredProducts = computed(() => {
   let filtered = paginatedData();
 
@@ -105,6 +114,7 @@ const filteredProducts = computed(() => {
   }
   return filtered;
 });
+
 </script>
 
 <style scoped>
@@ -114,7 +124,6 @@ table {
   margin-bottom: 16px;
   margin-top: 15px;
 }
-
 
 th {
   padding-top: 12px;
@@ -126,6 +135,7 @@ th {
   font-weight: 700;
   font-size: 16px;
 }
+
 th:first-child {
   border-top-left-radius: 8px;
 }
@@ -139,5 +149,12 @@ th:last-child {
   justify-content: flex-end;
   margin-right: 8px;
   gap: 5px;
+}
+
+.loaderTable{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
 }
 </style>

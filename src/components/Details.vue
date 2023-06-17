@@ -6,16 +6,19 @@
        <p class="productDetail"><p class="productDetails">Rating:</p>  {{ singleProduct?.rating }}</p>
        <p class="productDetail"><p class="productDetails">Description:</p>  {{ singleProduct?.description }}</p>
     </div>
-<div v-else>
-Loading...
+<div class="loaderTable" v-else>
+    <Loader/>
 </div>
 </template>
 
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
+import Loader from './Loader.vue';
 
 const props = defineProps(['id'])
 const singleProduct = ref(null)
+
+// Single Data Fetching
 onMounted(async()=>{
     try {
         const res = await fetch(`https://dummyjson.com/products/${props.id}`)
@@ -46,5 +49,12 @@ onUnmounted(()=>{
     font-size: 13.5px;
     font-weight: 500;
     width: 80px;
+}
+
+.loaderTable{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
 }
 </style>
